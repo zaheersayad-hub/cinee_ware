@@ -61,50 +61,55 @@ export default function CharacterSelection({ movieId, onSelectCharacter, onBack,
   };
 
   const getIcon = (type) => {
-    const iconClass = "w-16 h-16 text-[#D4AF37] opacity-80 group-hover:opacity-100 transition-all duration-500 drop-shadow-[0_0_8px_rgba(212,175,55,0.6)] group-hover:drop-shadow-[0_0_20px_rgba(212,175,55,1)] filter group-hover:brightness-125 mx-auto";
-    const strokeWidth = "1.25";
+    const iconClass = "w-16 h-16 text-[#D4AF37] opacity-90 group-hover:opacity-100 transition-all duration-500 drop-shadow-[0_0_8px_rgba(212,175,55,0.6)] group-hover:drop-shadow-[0_0_20px_rgba(212,175,55,1)] mx-auto";
+    const strokeWidth = "1.5";
 
     switch(type) {
       case 'hero':
         return (
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={iconClass}>
-            {/* Crown + Male face outline */}
-            <path d="M6 10l1.5-6 4.5 4 4.5-4 1.5 6z" />
-            <circle cx="12" cy="13" r="3" />
-            <path d="M7 22v-2a5 5 0 0 1 10 0v2" />
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.5" className={iconClass}>
+            <path d="M2 20h20M4 20l2-8 6 4 6-4 2 8" />
+            <circle cx="12" cy="7" r="2" fill="#D4AF37"/>
+            <circle cx="4" cy="10" r="1.5" fill="#D4AF37"/>
+            <circle cx="20" cy="10" r="1.5" fill="#D4AF37"/>
           </svg>
         );
       case 'heroine':
         return (
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={iconClass}>
-            {/* Female face/silhouette outline */}
-            <circle cx="12" cy="9" r="4" />
+            <circle cx="12" cy="10" r="4" />
+            <path d="M8 14v4c0 2-2 4-2 4s2-2 4-2h4c2 0 4 2 4 2s-2-2-2-4v-4" />
             <path d="M6 22v-2a6 6 0 0 1 12 0v2" />
-            <path d="M8 9a4 4 0 0 0-4 4v4" />
-            <path d="M16 9a4 4 0 0 1 4 4v4" />
           </svg>
         );
       case 'villain':
         return (
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={iconClass}>
-            {/* Mask / Devil face */}
             <path d="M12 21c-5 0-8-3-8-8v-3c0-3 3-5 5-5 1.5 0 3 1 3 2 0-1 1.5-2 3-2 2 0 5 2 5 5v3c0 5-3 8-8 8z" />
             <circle cx="9" cy="11" r="1.5" />
             <circle cx="15" cy="11" r="1.5" />
-            <path d="M12 16v3" />
           </svg>
         );
       case 'others':
       default:
         return (
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={iconClass}>
-            {/* Group of people icon */}
-            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
             <circle cx="9" cy="7" r="4" />
-            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
             <path d="M16 3.13a4 4 0 0 1 0 7.75" />
           </svg>
         );
+    }
+  };
+
+  const getSubtitle = (type) => {
+    switch(type) {
+      case 'hero': return 'Protagonist';
+      case 'heroine': return 'Female Lead';
+      case 'villain': return 'Antagonist';
+      case 'others': return 'Supporting Cast';
+      default: return 'Character';
     }
   };
 
@@ -126,8 +131,8 @@ export default function CharacterSelection({ movieId, onSelectCharacter, onBack,
             backgroundPosition: 'center'
           }}
         >
-          {/* rgba(0,0,0,0.7) dark overlay exactly as requested */}
-          <div className="absolute inset-0" style={{ backgroundColor: 'rgba(0,0,0,0.7)' }} />
+          {/* bg-black/50 overlay as requested */}
+          <div className="absolute inset-0 bg-black/50" />
         </div>
       )}
       
@@ -157,55 +162,38 @@ export default function CharacterSelection({ movieId, onSelectCharacter, onBack,
         </div>
 
         <motion.div 
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 mx-auto w-full max-w-6xl mt-auto mb-auto relative z-10"
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mx-auto w-full max-w-6xl mt-auto mb-auto relative z-10 overflow-x-hidden"
           style={{ display: 'grid' }}
           variants={containerVariants}
           initial="hidden"
           animate="show"
         >
           {characters.map((char) => {
-            const charImage = localMovie?.characters?.[char.type]?.scene;
-            
             return (
               <motion.div
                 key={char.type}
                 variants={itemVariants}
-                whileHover={{ scale: 1.03 }}
+                whileHover={{ scale: 1.03, y: -5 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => {
                   localStorage.setItem('cinewear_selected_character', JSON.stringify({ movieId, character: char.type }));
                   onSelectCharacter(char.type);
                 }}
-                className={`w-full relative aspect-[2/3] cursor-pointer group flex flex-col justify-end overflow-hidden border border-white/10 transition-all duration-500 hover:border-[#D4AF37] hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] shadow-2xl`}
-                style={{ borderRadius: '16px', backgroundColor: charImage ? 'transparent' : '#1a1a1a' }}
+                className="w-full relative bg-black/40 border border-[#D4AF37]/50 rounded-3xl p-6 lg:p-8 cursor-pointer group flex flex-col items-center justify-center transition-all duration-500 hover:border-[#D4AF37] hover:shadow-[0_0_30px_rgba(212,175,55,0.8)] overflow-hidden text-center aspect-[4/5] md:aspect-auto md:h-80"
               >
-                {/* Full Card Background Image — falls back to dark background (no icon) */}
-                {charImage && (
-                  <img 
-                    src={charImage} 
-                    alt={char.name}
-                    className="absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100"
-                    style={{ objectFit: 'cover', objectPosition: 'center top' }}
-                  />
-                )}
-                
-                {/* Center Image Icon Overlay */}
-                <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none transition-transform duration-700">
+                {/* Icon centered at top */}
+                <div className="mb-4 transform group-hover:scale-110 transition-transform duration-500">
                   {getIcon(char.type)}
                 </div>
                 
-                {/* Bottom dark gradient overlay explicitly for text readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500 pointer-events-none" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-500 pointer-events-none" />
-
-                {/* Content Overlay */}
-                <div className="relative z-10 p-5 md:p-6 flex flex-col items-start translate-y-3 group-hover:translate-y-0 transition-transform duration-500">
-                  <h3 className="text-xl md:text-3xl font-bold text-white mb-1 capitalize font-outfit drop-shadow-lg">{char.name}</h3>
-                  <span className="text-xs md:text-sm font-semibold text-[#D4AF37] uppercase tracking-[0.15em] font-sans drop-shadow-md">{char.type}</span>
+                {/* Card Content */}
+                <div className="relative z-10 flex flex-col items-center justify-center w-full mt-2">
+                  <h3 className="text-xl lg:text-2xl font-bold text-white mb-2 capitalize font-outfit drop-shadow-lg truncate w-full px-2">{char.name}</h3>
+                  <span className="text-[10px] md:text-xs font-semibold text-gray-400 uppercase tracking-widest font-sans truncate w-full px-2">{getSubtitle(char.type)}</span>
                   
                   {/* Subtle access indicator */}
-                  <div className="mt-4 flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0 relative z-20">
-                    <span className="text-[10px] md:text-xs text-white/90 uppercase tracking-widest font-semibold">Access Vault</span>
+                  <div className="mt-4 md:mt-6 flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0 relative z-20">
+                    <span className="text-[10px] md:text-xs text-[#D4AF37] uppercase tracking-widest font-semibold">Select</span>
                     <ArrowLeft className="w-3 h-3 md:w-4 md:h-4 text-[#D4AF37] -rotate-180" />
                   </div>
                 </div>
