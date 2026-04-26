@@ -147,8 +147,8 @@ export default function DiscoveryHub({ onSelectMovie, onExit, onOpenProfile }) {
         className={`absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full blur-[150px] mix-blend-screen pointer-events-none transition-colors duration-1000 ${movies.length > 0 && movies[0]?.theme?.blurBg ? movies[0].theme.blurBg : 'bg-[#D4AF37]/10'}`} 
       />
 
-      <nav className="flex items-center justify-between px-8 py-6 z-10 glass-card mx-8 mt-6 rounded-3xl border-t border-[#D4AF37]/20 shadow-[0_4px_30px_rgba(212,175,55,0.1)]">
-         <h1 className="text-2xl font-bold tracking-widest text-white">
+      <nav className="flex items-center justify-between px-4 py-3 md:px-8 md:py-6 z-10 glass-card mx-4 mt-3 md:mx-8 md:mt-6 rounded-3xl border-t border-[#D4AF37]/20 shadow-[0_4px_30px_rgba(212,175,55,0.1)]">
+         <h1 className="text-xl md:text-2xl font-bold tracking-widest text-white">
            CINE<span className={`transition-colors duration-500 text-glow ${movies.length > 0 && movies[0]?.theme?.text ? movies[0].theme.text : 'text-[#D4AF37]'}`}>WEAR</span>
          </h1>
          
@@ -166,21 +166,21 @@ export default function DiscoveryHub({ onSelectMovie, onExit, onOpenProfile }) {
          <div className="flex items-center space-x-3">
            <button 
              onClick={() => onOpenProfile('liked')}
-             className="flex items-center justify-center p-2.5 text-gray-300 hover:text-white transition-colors group bg-white/5 rounded-full hover:bg-white/10 border border-white/5"
+             className="hidden md:flex items-center justify-center p-2.5 text-gray-300 hover:text-white transition-colors group bg-white/5 rounded-full hover:bg-white/10 border border-white/5"
            >
              <User className="w-5 h-5 group-hover:scale-110 transition-transform" />
            </button>
            <button 
              onClick={onExit}
-             className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors uppercase text-sm tracking-wider font-semibold group bg-white/5 px-4 py-2 rounded-full hover:bg-white/10 border border-white/5"
+             className="flex items-center space-x-1 md:space-x-2 text-gray-300 hover:text-white transition-colors uppercase text-xs md:text-sm tracking-wider font-semibold group bg-white/5 px-3 md:px-4 py-2 rounded-full hover:bg-white/10 border border-white/5 whitespace-nowrap"
            >
              <span>Sign Out</span>
-             <LogOut className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+             <LogOut className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
            </button>
          </div>
       </nav>
 
-      <div className="md:hidden px-8 mt-6 z-10">
+      <div className="md:hidden px-4 mt-3 z-10">
          <div className="flex items-center bg-white/5 border border-white/10 rounded-full px-5 py-3 w-full focus-within:border-white/30 transition-colors shadow-inner">
             <Search className="w-4 h-4 text-[#FDE047] mr-2" />
             <input 
