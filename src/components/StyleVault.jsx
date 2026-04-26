@@ -157,7 +157,7 @@ export default function StyleVault({ movieId, characterType, onBack, onOpenProfi
                   initial={{ opacity: 0, x: 30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.2 + (index * 0.1), duration: 0.5 }}
-                  className={`glass-card rounded-2xl overflow-hidden flex flex-col sm:flex-row group border border-white/5 ${movieTheme.borderHover} ${movieTheme.glowBox} transition-all duration-300 bg-dark-800/50`}
+                  className={`glass-card rounded-2xl overflow-hidden flex flex-col sm:flex-row group border border-white/5 ${movieTheme?.borderHover || "default"} ${movieTheme?.glowBox || ""} transition-all duration-300 bg-dark-800/50`}
                 >
                   <div className="w-full sm:w-56 h-56 sm:h-auto relative overflow-hidden shrink-0 bg-dark-800 p-2">
                     <div className="w-full h-full rounded-xl overflow-hidden relative">
@@ -171,7 +171,7 @@ export default function StyleVault({ movieId, characterType, onBack, onOpenProfi
                   </div>
                   <div className="p-6 md:p-8 flex flex-col justify-between flex-grow">
                     <div>
-                      <h3 className={`text-xl md:text-2xl font-bold text-white mb-2 ${movieTheme.groupHoverText} transition-colors font-outfit`}>{product.name}</h3>
+                      <h3 className={`text-xl md:text-2xl font-bold text-white mb-2 ${movieTheme?.groupHoverText || ""} transition-colors font-outfit`}>{product.name}</h3>
                       <p className="text-2xl font-light text-gray-300 mb-6 font-sans">₹{product.price.toLocaleString('en-IN')}</p>
                     </div>
                     <div className="flex items-center space-x-3 mt-auto">
@@ -188,7 +188,7 @@ export default function StyleVault({ movieId, characterType, onBack, onOpenProfi
                         onClick={() => toggleLike(product)}
                         className={`p-3.5 rounded-xl border transition-all shadow-lg hover:-translate-y-0.5 ${
                           isLiked(product.id) 
-                            ? `${movieTheme.border} ${movieTheme.bgLight} ${movieTheme.text}` 
+                            ? `${movieTheme?.border || "border-[#D4AF37]"} ${movieTheme?.bgLight || "bg-[#D4AF37]/20"} ${movieTheme?.text || "text-[#D4AF37]"}` 
                             : 'border-white/10 bg-white/5 text-white hover:bg-white/10'
                         }`}
                         title={isLiked(product.id) ? "Unlike" : "Like"}

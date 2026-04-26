@@ -11,8 +11,7 @@ const defaultTheme = {
 };
 
 const allMovies = (Array.isArray(movieData) ? movieData : Object.values(movieData))
-  .filter(m => m.type === "movie")
-  .map(m => ({ ...m, theme: m.theme || defaultTheme }));
+  .map(m => ({ ...m, theme: m?.theme || defaultTheme }));
 
 export default function DiscoveryHub({ onSelectMovie, onExit, onOpenProfile }) {
   const [searchQuery, setSearchQuery] = useState('');
@@ -37,13 +36,13 @@ export default function DiscoveryHub({ onSelectMovie, onExit, onOpenProfile }) {
   const toggleLike = (e, movie) => {
     e.stopPropagation();
     let current = safeParse("liked") || [];
-    if (current.find(m => m.id === movie.id)) {
-      current = current.filter(m => m.id !== movie.id);
+    if (current.find(m => m.id === movie?.id)) {
+      current = current.filter(m => m.id !== movie?.id);
     } else {
       current.push({
-        id: movie.id,
-        title: movie.title,
-        poster: movie.poster,
+        id: movie?.id,
+        title: movie?.title,
+        poster: movie?.poster,
         character: null
       });
     }
@@ -59,14 +58,14 @@ export default function DiscoveryHub({ onSelectMovie, onExit, onOpenProfile }) {
     if (query.length === 0) {
       setMovies(allMovies);
     } else {
-      const filtered = allMovies.filter(m => m.title.toLowerCase().includes(query));
+      const filtered = allMovies.filter(m => m?.title?.toLowerCase().includes(query));
       setMovies(filtered);
     }
   }, [searchQuery]);
 
   const renderMovieCard = (movie, index, isHorizontal = false) => {
     if (!movie) return null;
-    const safeTheme = movie.theme || {
+    const safeTheme = movie?.theme || {
       text: "text-[#D4AF37]",
       textLight: "text-[#FDE047]",
       bg: "bg-[#D4AF37]",
@@ -89,15 +88,15 @@ export default function DiscoveryHub({ onSelectMovie, onExit, onOpenProfile }) {
         whileTap={{ scale: 0.98 }}
         onClick={() => {
           localStorage.setItem("selectedMovie", JSON.stringify(movie));
-          onSelectMovie(movie.id, movie);
+          onSelectMovie(movie?.id, movie);
         }}
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.3 }}
       >
       <img 
-        src={movie.poster} 
-        alt={movie.title}
+        src={movie?.poster || ""} 
+        alt={movie?.title || "movie"}
         className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
         loading="lazy"
         onError={(e) => { e.target.src = "https://placehold.co/500x750/1a1a1a/D4AF37?text=Image+Unavailable" }}
@@ -105,23 +104,23 @@ export default function DiscoveryHub({ onSelectMovie, onExit, onOpenProfile }) {
       <div className="absolute top-4 right-4 z-20">
         <button
           onClick={(e) => toggleLike(e, movie)}
-          className={`p-2 rounded-full backdrop-blur-md transition-all ${isLiked(movie.id) ? 'bg-[#D4AF37] text-white shadow-[0_0_15px_rgba(212,175,55,0.6)]' : 'bg-black/50 text-white/70 hover:bg-black/80 hover:text-white'}`}
+          className={`p-2 rounded-full backdrop-blur-md transition-all ${isLiked(movie?.id) ? 'bg-[#D4AF37] text-white shadow-[0_0_15px_rgba(212,175,55,0.6)]' : 'bg-black/50 text-white/70 hover:bg-black/80 hover:text-white'}`}
         >
-          <Heart className="w-5 h-5" fill={isLiked(movie.id) ? "currentColor" : "none"} />
+          <Heart className="w-5 h-5" fill={isLiked(movie?.id) ? "currentColor" : "none"} />
         </button>
       </div>
       <div className={`absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity`} />
       
-      <div className={`absolute inset-0 bg-gradient-to-t ${safeTheme.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
+      <div className={`absolute inset-0 bg-gradient-to-t ${safeTheme?.gradient || "from-transparent to-transparent"} opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
 
       <div className="absolute bottom-0 left-0 p-4 md:p-6 w-full z-10 transition-transform duration-500">
-         <h3 className="text-base md:text-xl font-bold text-white group-hover:text-glow transition-all mb-1 font-cinzel leading-tight">{movie.title}</h3>
-         {movie.year && (
+         <h3 className="text-base md:text-xl font-bold text-white group-hover:text-glow transition-all mb-1 font-cinzel leading-tight">{movie?.title}</h3>
+         {movie?.year && (
            <p className="text-[10px] md:text-xs text-gray-300 font-sans mb-2 truncate group-hover:text-white transition-colors">
-             {movie.year}
+             {movie?.year}
            </p>
          )}
-         <div className={`w-8 h-1 flex ${safeTheme.bg} rounded-full scale-x-50 group-hover:scale-x-100 transition-transform origin-left duration-500`} />
+         <div className={`w-8 h-1 flex ${safeTheme?.bg || "bg-transparent"} rounded-full scale-x-50 group-hover:scale-x-100 transition-transform origin-left duration-500`} />
       </div>
     </motion.div>
   );
@@ -133,23 +132,23 @@ export default function DiscoveryHub({ onSelectMovie, onExit, onOpenProfile }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0, filter: 'blur(10px)' }}
       transition={{ duration: 0.6 }}
-      className={`min-h-screen flex flex-col relative transition-all duration-1000 ${movies.length > 0 && movies[0]?.theme?.gradient ? movies[0].theme.gradient : 'bg-dark-900'}`}
+      className={`min-h-screen flex flex-col relative transition-all duration-1000 ${movies?.[0]?.theme?.gradient || 'bg-dark-900'}`}
     >
       <div 
         className={`absolute inset-0 z-0 bg-dark-900/80 backdrop-blur-3xl pointer-events-none`} 
       />
       
       <div 
-        className={`absolute top-0 right-[-10%] w-[50%] h-[50%] rounded-full blur-[180px] mix-blend-screen pointer-events-none transition-colors duration-1000 ${movies.length > 0 && movies[0]?.theme?.blurBg ? movies[0].theme.blurBg : 'bg-[#D4AF37]/10'}`} 
+        className={`absolute top-0 right-[-10%] w-[50%] h-[50%] rounded-full blur-[180px] mix-blend-screen pointer-events-none transition-colors duration-1000 ${movies?.[0]?.theme?.blurBg || 'bg-[#D4AF37]/10'}`} 
       />
 
       <div 
-        className={`absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full blur-[150px] mix-blend-screen pointer-events-none transition-colors duration-1000 ${movies.length > 0 && movies[0]?.theme?.blurBg ? movies[0].theme.blurBg : 'bg-[#D4AF37]/10'}`} 
+        className={`absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full blur-[150px] mix-blend-screen pointer-events-none transition-colors duration-1000 ${movies?.[0]?.theme?.blurBg || 'bg-[#D4AF37]/10'}`} 
       />
 
       <nav className="flex items-center justify-between px-4 py-3 md:px-8 md:py-6 z-10 glass-card mx-4 mt-3 md:mx-8 md:mt-6 rounded-3xl border-t border-[#D4AF37]/20 shadow-[0_4px_30px_rgba(212,175,55,0.1)]">
          <h1 className="text-xl md:text-2xl font-bold tracking-widest text-white">
-           CINE<span className={`transition-colors duration-500 text-glow ${movies.length > 0 && movies[0]?.theme?.text ? movies[0].theme.text : 'text-[#D4AF37]'}`}>WEAR</span>
+           CINE<span className={`transition-colors duration-500 text-glow ${movies?.[0]?.theme?.text || 'text-[#D4AF37]'}`}>WEAR</span>
          </h1>
          
          <div className={`hidden md:flex items-center bg-white/5 border border-white/10 rounded-full px-5 py-2.5 w-1/3 focus-within:border-white/40 transition-colors shadow-inner`}>

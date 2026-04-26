@@ -40,5 +40,20 @@ export const movieData = [
     language: "Telugu",
     type: "movie",
     poster: "https://wallpapercave.com/wp/wp15523801.jpg"
+  },
+  {
+    id: "sahoo",
+    title: "Saaho",
+    poster: "https://wallpapercave.com/wp/wp4508668.jpg"
+  },
+  {
+    id: "hi-nanna",
+    title: "Hi Nanna",
+    poster: "https://wallpapercave.com/wp/wp13303849.jpg"
+  },
+  {
+    id: "sardar",
+    title: "Sardar Gabbar Singh",
+    poster: "https://wallpapercave.com/wp/wp8814427.jpg"
   }
 ];

@@ -119,14 +119,14 @@ export default function CharacterSelection({ movieId, onSelectCharacter, onBack,
       animate={{ opacity: 1 }}
       exit={{ opacity: 0, scale: 1.05 }}
       transition={{ duration: 0.5 }}
-      className={`min-h-screen flex flex-col p-4 md:p-8 relative overflow-hidden transition-colors duration-1000 ${movieTheme.gradient}`}
+      className={`min-h-screen flex flex-col p-4 md:p-8 relative overflow-hidden transition-colors duration-1000 ${movieTheme?.gradient || ""}`}
     >
       {/* Full screen background using backgroundImage as requested */}
       {localMovie?.poster && (
         <div 
           className="absolute inset-0 z-0 pointer-events-none"
           style={{
-            backgroundImage: `url(${localMovie.poster})`,
+            backgroundImage: `url(${localMovie?.poster || ""})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}
@@ -137,8 +137,8 @@ export default function CharacterSelection({ movieId, onSelectCharacter, onBack,
       )}
       
       {/* Background glow effects */}
-      <div className={`absolute top-0 right-0 w-[60%] h-[70%] ${movieTheme.blurBg} rounded-full blur-[150px] mix-blend-screen pointer-events-none z-0 opacity-20`} />
-      <div className={`absolute bottom-0 left-0 w-[50%] h-[50%] ${movieTheme.blurBg} rounded-full blur-[200px] mix-blend-screen pointer-events-none z-0 opacity-10`} />
+      <div className={`absolute top-0 right-0 w-[60%] h-[70%] ${movieTheme?.blurBg || ""} rounded-full blur-[150px] mix-blend-screen pointer-events-none z-0 opacity-20`} />
+      <div className={`absolute bottom-0 left-0 w-[50%] h-[50%] ${movieTheme?.blurBg || ""} rounded-full blur-[200px] mix-blend-screen pointer-events-none z-0 opacity-10`} />
 
       <div className="z-10 relative flex-grow flex flex-col max-w-7xl mx-auto w-full">
         <button 
