@@ -20,8 +20,8 @@ function App() {
       if (!localStorage.getItem("history")) {
         localStorage.setItem("history", JSON.stringify([]));
       }
-    } catch (error) {
-      console.error("LocalStorage Error:", error);
+    } catch (e) {
+      console.log("localStorage not available");
     }
   }, []);
   const [currentPhase, setCurrentPhase] = useState('LOGIN');
