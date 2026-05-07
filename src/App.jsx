@@ -3,7 +3,7 @@ import { AnimatePresence } from 'framer-motion';
 import Login from './components/Login';
 import DiscoveryHub from './components/DiscoveryHub';
 import CharacterSelection from './components/CharacterSelection';
-import StyleVault from './components/StyleVault';
+import OutfitDetail from './components/OutfitDetail';
 import UserProfile from './components/UserProfile';
 
 function App() {
@@ -113,7 +113,7 @@ function App() {
         )}
 
         {currentPhase === 'VAULT' && selectedMovieId && selectedCharacterType && (
-          <StyleVault 
+          <OutfitDetail 
             key="vault" 
             movieId={selectedMovieId} 
             characterType={selectedCharacterType} 
