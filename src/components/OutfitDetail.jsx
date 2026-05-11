@@ -159,7 +159,7 @@ export default function OutfitDetail({ movieId, characterType, onBack, onOpenPro
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.8 }}
-            className="w-full h-full relative rounded-3xl overflow-hidden glass-card p-2 md:p-3 shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-[#D4AF37]/20 group"
+            className="w-full flex-grow relative rounded-3xl overflow-hidden glass-card p-2 md:p-3 shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-[#D4AF37]/20 group mb-6"
           >
             <div className="w-full h-full rounded-2xl overflow-hidden relative">
               {/* Image */}
@@ -210,6 +210,29 @@ export default function OutfitDetail({ movieId, characterType, onBack, onOpenPro
                   </div>
                 </div>
               </div>
+            </div>
+          </motion.div>
+
+          {/* Seen in Scene Gallery */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+            className="shrink-0"
+          >
+            <h3 className="text-sm text-gray-400 font-sans tracking-[0.2em] uppercase mb-6 flex items-center">
+              <span className="w-8 h-[1px] bg-gray-600 mr-4"></span>
+              Seen in Scene
+            </h3>
+            <div className="flex gap-4 overflow-x-auto hide-scrollbar pb-4 snap-x">
+              {SCENE_THUMBNAILS.map((thumb, idx) => (
+                <div key={idx} className="min-w-[140px] md:min-w-[180px] h-24 md:h-28 rounded-xl overflow-hidden relative snap-center group border border-white/10 hover:border-[#D4AF37]/50 transition-colors cursor-pointer">
+                  <img src={thumb} alt={`Scene ${idx}`} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <PlayCircle className="w-8 h-8 text-white drop-shadow-md" />
+                  </div>
+                </div>
+              ))}
             </div>
           </motion.div>
         </div>
@@ -287,53 +310,6 @@ export default function OutfitDetail({ movieId, characterType, onBack, onOpenPro
                 </motion.div>
               ))}
             </div>
-
-            {/* Where to Buy Section */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.8 }}
-              className="mb-16"
-            >
-              <h3 className="text-sm text-gray-400 font-sans tracking-[0.2em] uppercase mb-6 flex items-center">
-                <span className="w-8 h-[1px] bg-gray-600 mr-4"></span>
-                Where to Buy Alternates
-                <span className="w-8 h-[1px] bg-gray-600 ml-4"></span>
-              </h3>
-              <div className="flex flex-wrap gap-4">
-                {['Amazon', 'Flipkart', 'Myntra', 'AJIO'].map((store) => (
-                  <a 
-                    key={store}
-                    href="#"
-                    className="px-6 py-2.5 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 hover:border-[#D4AF37]/50 text-gray-300 hover:text-white transition-all text-sm font-semibold tracking-wide"
-                  >
-                    {store}
-                  </a>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Seen in Scene Gallery */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
-            >
-              <h3 className="text-sm text-gray-400 font-sans tracking-[0.2em] uppercase mb-6 flex items-center">
-                <span className="w-8 h-[1px] bg-gray-600 mr-4"></span>
-                Seen in Scene
-              </h3>
-              <div className="flex gap-4 overflow-x-auto hide-scrollbar pb-4 snap-x">
-                {SCENE_THUMBNAILS.map((thumb, idx) => (
-                  <div key={idx} className="min-w-[140px] md:min-w-[180px] h-24 md:h-28 rounded-xl overflow-hidden relative snap-center group border border-white/10 hover:border-[#D4AF37]/50 transition-colors cursor-pointer">
-                    <img src={thumb} alt={`Scene ${idx}`} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                      <PlayCircle className="w-8 h-8 text-white drop-shadow-md" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
 
           </div>
         </div>
