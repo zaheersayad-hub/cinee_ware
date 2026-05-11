@@ -120,7 +120,7 @@ export default function OutfitDetail({ movieId, characterType, onBack, onOpenPro
       animate={{ opacity: 1 }} 
       exit={{ opacity: 0 }} 
       transition={{ duration: 0.8 }}
-      className="min-h-screen md:h-screen bg-[#0a0a0d] text-white flex flex-col font-sans overflow-x-hidden md:overflow-hidden relative selection:bg-[#D4AF37]/30 selection:text-white"
+      className="min-h-screen bg-[#0a0a0d] text-white flex flex-col font-sans overflow-x-hidden relative selection:bg-[#D4AF37]/30 selection:text-white"
     >
       {/* Background Ambience */}
       <div className="absolute top-0 left-1/4 w-[50%] h-[50%] bg-[#D4AF37]/10 rounded-full blur-[150px] mix-blend-screen pointer-events-none opacity-50 z-0"></div>
@@ -151,62 +151,64 @@ export default function OutfitDetail({ movieId, characterType, onBack, onOpenPro
       </nav>
 
       {/* Main Content Split Pane */}
-      <div className="flex-grow grid grid-cols-1 md:grid-cols-[45%_55%] w-full h-auto md:h-full md:min-h-0 z-10 relative">
+      <div className="flex-grow grid grid-cols-1 md:grid-cols-[45%_55%] w-full h-auto z-10 relative">
         
         {/* Left Panel: Cinematic Image */}
-        <div className="w-full md:sticky md:top-0 h-auto md:h-[100vh] md:overflow-hidden p-0 md:p-6 flex flex-col relative z-10">
+        <div className="w-full md:sticky md:top-0 h-auto md:h-screen md:overflow-y-auto hide-scrollbar p-0 md:p-6 flex flex-col relative z-10">
           <motion.div 
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.8 }}
-            className="w-full h-auto md:h-full relative md:rounded-3xl md:overflow-hidden md:glass-card md:p-2 md:shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-b md:border border-[#D4AF37]/20 group"
+            className="w-full h-auto relative md:rounded-3xl md:overflow-hidden md:glass-card md:p-2 md:shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-b md:border border-[#D4AF37]/20 group"
           >
-            <div className="w-full h-[50vh] md:h-full md:rounded-2xl overflow-hidden relative">
-              {/* Image */}
+            <div className="w-full aspect-[3/4] md:aspect-[4/5] md:max-h-[65vh] md:rounded-2xl overflow-hidden relative bg-[#050505]">
+              {/* Blurred premium backdrop */}
+              <img src={posterImg} alt="" className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-40 scale-110" />
+              
+              {/* Image perfectly scaled without forced cropping */}
               <img 
                 src={posterImg} 
                 alt={movieTitle} 
-                className="absolute inset-0 w-full h-full object-cover transform md:group-hover:scale-105 transition-transform duration-[2s] ease-out"
+                className="absolute inset-0 w-full h-full object-contain transform md:group-hover:scale-[1.03] transition-transform duration-[2s] ease-out z-10"
               />
               
               {/* Dark Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0d] via-[#0a0a0d]/40 md:via-transparent to-transparent"></div>
-              <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0d]/30 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0d] via-transparent to-transparent z-10 pointer-events-none"></div>
               
               {/* Top Badge */}
-              <div className="absolute top-6 left-6 bg-[#E5B109]/90 text-black px-3 py-1 rounded text-xs font-bold font-sans tracking-widest shadow-lg flex items-center gap-1">
+              <div className="absolute top-6 left-6 bg-[#E5B109]/90 text-black px-3 py-1 rounded text-xs font-bold font-sans tracking-widest shadow-lg flex items-center gap-1 z-20">
                 <Star className="w-3 h-3 fill-black" /> 8.5
               </div>
             </div>
               
-            {/* Bottom Content inside Image */}
-            <div className="p-5 md:p-0 relative md:absolute md:bottom-4 md:left-4 md:right-4 lg:bottom-6 lg:left-6 lg:right-6 bg-[#0a0a0d] md:bg-transparent -mt-6 md:mt-0 rounded-t-3xl md:rounded-none z-20">
+            {/* Bottom Content cleanly stacked BELOW Image */}
+            <div className="p-5 md:p-6 relative bg-[#0a0a0d] md:bg-transparent -mt-6 md:-mt-2 rounded-t-3xl md:rounded-none z-20">
               <h4 className="text-[#D4AF37] text-xs md:text-sm uppercase tracking-[0.3em] font-semibold mb-1 drop-shadow-md">
                 {movieTitle}
               </h4>
-              <h1 className="text-3xl md:text-4xl font-cinzel font-bold text-white mb-1 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+              <h1 className="text-3xl md:text-4xl font-cinzel font-bold text-white mb-2 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] leading-tight">
                 {charName}
               </h1>
-              <p className="text-gray-300 italic font-sans text-xs md:text-sm mb-4 border-l-2 border-[#D4AF37] pl-3 max-w-[80%]">
+              <p className="text-gray-300 italic font-sans text-xs md:text-sm mb-5 border-l-2 border-[#D4AF37] pl-3 max-w-[90%]">
                 "The iconic look that defined attitude and power."
               </p>
               
               {/* LOOK DETAILS block */}
-              <div className="glassmorphism rounded-xl p-3 md:p-4 border border-white/10 backdrop-blur-md flex flex-wrap gap-y-2 md:gap-y-3 shadow-2xl bg-white/5 md:bg-transparent">
+              <div className="glassmorphism rounded-xl p-4 md:p-5 border border-white/10 backdrop-blur-md flex flex-wrap gap-y-3 md:gap-y-4 shadow-2xl bg-white/5">
                 <div className="w-1/2">
-                  <p className="text-[9px] md:text-[10px] text-gray-400 uppercase tracking-widest mb-0.5">Movie</p>
+                  <p className="text-[10px] md:text-[11px] text-gray-400 uppercase tracking-widest mb-1">Movie</p>
                   <p className="text-[#D4AF37] font-semibold text-xs md:text-sm truncate">{movieTitle}</p>
                 </div>
                 <div className="w-1/2 pl-3 md:pl-4 border-l border-white/10">
-                  <p className="text-[9px] md:text-[10px] text-gray-400 uppercase tracking-widest mb-0.5">Character</p>
+                  <p className="text-[10px] md:text-[11px] text-gray-400 uppercase tracking-widest mb-1">Character</p>
                   <p className="text-white font-semibold text-xs md:text-sm capitalize">{charName}</p>
                 </div>
                 <div className="w-1/2">
-                  <p className="text-[9px] md:text-[10px] text-gray-400 uppercase tracking-widest mb-0.5">Scene</p>
+                  <p className="text-[10px] md:text-[11px] text-gray-400 uppercase tracking-widest mb-1">Scene</p>
                   <p className="text-white font-semibold text-xs md:text-sm">Action Sequence</p>
                 </div>
                 <div className="w-1/2 pl-3 md:pl-4 border-l border-white/10">
-                  <p className="text-[9px] md:text-[10px] text-gray-400 uppercase tracking-widest mb-0.5">Style</p>
+                  <p className="text-[10px] md:text-[11px] text-gray-400 uppercase tracking-widest mb-1">Style</p>
                   <p className="text-[#D4AF37] font-semibold text-xs md:text-sm">Mass / Rustic</p>
                 </div>
               </div>
@@ -215,8 +217,8 @@ export default function OutfitDetail({ movieId, characterType, onBack, onOpenPro
         </div>
 
         {/* Right Panel: Products & Details */}
-        <div className="w-full h-auto md:h-[100vh] lg:h-full md:overflow-y-auto hide-scrollbar bg-[#121217]/50 backdrop-blur-2xl border-t md:border-t-0 md:border-l border-white/5 relative">
-          <div className="p-4 md:p-6 max-w-4xl mx-auto flex flex-col gap-4">
+        <div className="w-full h-auto bg-[#121217]/50 backdrop-blur-2xl border-t md:border-t-0 md:border-l border-white/5 relative pb-12 md:pb-24">
+          <div className="p-4 md:p-8 max-w-4xl mx-auto flex flex-col gap-4 md:gap-6">
             
             {/* Header */}
             <motion.div 
