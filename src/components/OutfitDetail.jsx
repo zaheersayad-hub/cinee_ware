@@ -154,26 +154,23 @@ export default function OutfitDetail({ movieId, characterType, onBack, onOpenPro
       <div className="flex-grow grid grid-cols-1 md:grid-cols-[45%_55%] w-full h-auto z-10 relative">
         
         {/* Left Panel: Cinematic Image */}
-        <div className="w-full md:sticky md:top-0 h-auto md:h-screen md:overflow-y-auto hide-scrollbar p-0 md:p-6 flex flex-col relative z-10">
+        <div className="w-full h-auto lg:h-full p-0 md:p-6 flex flex-col gap-0 md:gap-6 relative z-10">
           <motion.div 
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.8 }}
-            className="w-full h-auto relative md:rounded-3xl md:overflow-hidden md:glass-card md:p-2 md:shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-b md:border border-[#D4AF37]/20 group"
+            className="w-full h-auto lg:flex-1 flex flex-col relative md:rounded-3xl md:overflow-hidden md:glass-card md:p-2 md:shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-b md:border border-[#D4AF37]/20 group"
           >
-            <div className="w-full aspect-[3/4] md:aspect-[4/5] md:max-h-[65vh] md:rounded-2xl overflow-hidden relative bg-[#050505]">
-              {/* Blurred premium backdrop */}
-              <img src={posterImg} alt="" className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-40 scale-110" />
-              
-              {/* Image perfectly scaled without forced cropping */}
+            <div className="w-full aspect-[3/4] lg:aspect-auto h-auto lg:flex-1 md:rounded-2xl overflow-hidden relative bg-[#050505]">
+              {/* Tall premium cinematic image */}
               <img 
                 src={posterImg} 
                 alt={movieTitle} 
-                className="absolute inset-0 w-full h-full object-contain transform md:group-hover:scale-[1.03] transition-transform duration-[2s] ease-out z-10"
+                className="absolute inset-0 w-full h-full object-cover transform md:group-hover:scale-[1.03] transition-transform duration-[2s] ease-out z-10"
               />
               
-              {/* Dark Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0d] via-transparent to-transparent z-10 pointer-events-none"></div>
+              {/* Dark Gradient Overlay for seamless blending */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0d] via-[#0a0a0d]/10 to-transparent z-10 pointer-events-none"></div>
               
               {/* Top Badge */}
               <div className="absolute top-6 left-6 bg-[#E5B109]/90 text-black px-3 py-1 rounded text-xs font-bold font-sans tracking-widest shadow-lg flex items-center gap-1 z-20">
@@ -212,61 +209,60 @@ export default function OutfitDetail({ movieId, characterType, onBack, onOpenPro
                   <p className="text-[#D4AF37] font-semibold text-xs md:text-sm">Mass / Rustic</p>
                 </div>
               </div>
+            </div>
+          </motion.div>
 
-              {/* Desktop Only: Extended Cinematic Info */}
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                className="hidden md:flex flex-col mt-6 pt-6 border-t border-white/10"
-              >
-                {/* Meta Header */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[#D4AF37] font-semibold text-[10px] tracking-widest uppercase">Director</span>
-                    <span className="text-gray-300 text-xs">Sandeep Vanga</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[#D4AF37] font-semibold text-[10px] tracking-widest uppercase">Year</span>
-                    <span className="text-gray-300 text-xs">2023</span>
-                  </div>
-                  <div className="flex items-center gap-1.5 bg-[#121217] px-2 py-1 rounded border border-white/5 shadow-inner">
-                    <Star className="w-3 h-3 fill-[#E5B109] text-[#E5B109]" />
-                    <span className="text-white font-bold text-xs">8.5</span>
-                    <span className="text-gray-500 text-[9px] uppercase tracking-wider ml-1">IMDb</span>
-                  </div>
-                </div>
+          {/* Desktop Only: Extended Cinematic Info */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="hidden lg:flex flex-col justify-between lg:flex-1 p-5 md:p-6 rounded-3xl glass-card border border-[#D4AF37]/20 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+          >
+            {/* Meta Header */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-[#D4AF37] font-semibold text-[10px] tracking-widest uppercase">Director</span>
+                <span className="text-gray-300 text-xs">Sandeep Vanga</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-[#D4AF37] font-semibold text-[10px] tracking-widest uppercase">Runtime</span>
+                <span className="text-gray-300 text-xs">201 min</span>
+              </div>
+              <div className="flex items-center gap-1.5 bg-[#121217] px-2 py-1 rounded border border-white/5 shadow-inner">
+                <Star className="w-3 h-3 fill-[#E5B109] text-[#E5B109]" />
+                <span className="text-white font-bold text-xs">8.5</span>
+              </div>
+            </div>
 
-                {/* Synopsis */}
-                <div className="mb-5">
-                  <p className="text-gray-400 font-sans text-xs leading-relaxed">
-                    A son's obsessive love for his father leads him down a dark, violent path. The character exudes unhinged aggression, combining tailored elegance with raw, blood-stained brutality that redefined the modern anti-hero archetype.
-                  </p>
-                </div>
+            {/* Synopsis */}
+            <div>
+              <p className="text-gray-400 font-sans text-xs leading-relaxed">
+                A son's obsessive love for his father leads him down a dark, violent path. The character exudes unhinged aggression, combining tailored elegance with raw, blood-stained brutality that redefined the modern anti-hero archetype.
+              </p>
+            </div>
 
-                {/* Character Energy / Mood Tags */}
-                <div className="mb-5">
-                  <p className="text-[9px] text-gray-500 uppercase tracking-widest mb-2">Character Energy</p>
-                  <div className="flex flex-wrap gap-2">
-                    {["Alpha", "Aggressive", "Obsessive", "Unpredictable", "Mass"].map((tag, i) => (
-                      <span key={i} className="px-3 py-1.5 text-[9px] font-bold tracking-widest uppercase text-gray-300 bg-[#121217] border border-white/5 rounded hover:border-[#D4AF37]/50 transition-colors cursor-default shadow-sm">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+            {/* Character Energy / Mood Tags */}
+            <div>
+              <p className="text-[9px] text-gray-500 uppercase tracking-widest mb-2">Character Energy</p>
+              <div className="flex flex-wrap gap-2">
+                {["Mass", "Emotional", "Action", "Obsessive", "Rustic"].map((tag, i) => (
+                  <span key={i} className="px-3 py-1.5 text-[9px] font-bold tracking-widest uppercase text-gray-300 bg-[#121217] border border-white/5 rounded hover:border-[#D4AF37]/50 transition-colors cursor-default shadow-sm">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
 
-                {/* Signature Dialogue */}
-                <div className="bg-gradient-to-r from-[#121217] to-[#0a0a0d] rounded-xl p-4 border-l-2 border-[#D4AF37] relative overflow-hidden shadow-lg">
-                  <div className="absolute -right-4 -bottom-4 opacity-[0.02]">
-                    <User className="w-32 h-32" />
-                  </div>
-                  <p className="text-[9px] text-[#D4AF37]/70 uppercase tracking-widest mb-1.5 relative z-10">Signature Dialogue</p>
-                  <p className="text-gray-200 font-cinzel text-sm italic relative z-10 leading-snug drop-shadow-md">
-                    "You have no idea what I can do for you... and what I can do to them."
-                  </p>
-                </div>
-              </motion.div>
+            {/* Signature Dialogue */}
+            <div className="bg-gradient-to-r from-[#121217] to-[#0a0a0d] rounded-xl p-4 border-l-2 border-[#D4AF37] relative overflow-hidden shadow-lg mt-2 lg:mt-0">
+              <div className="absolute -right-4 -bottom-4 opacity-[0.02]">
+                <User className="w-32 h-32" />
+              </div>
+              <p className="text-[9px] text-[#D4AF37]/70 uppercase tracking-widest mb-1.5 relative z-10">Signature Dialogue</p>
+              <p className="text-gray-200 font-cinzel text-sm italic relative z-10 leading-snug drop-shadow-md">
+                "You have no idea what I can do for you... and what I can do to them."
+              </p>
             </div>
           </motion.div>
         </div>
