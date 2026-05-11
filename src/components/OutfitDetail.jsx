@@ -120,7 +120,7 @@ export default function OutfitDetail({ movieId, characterType, onBack, onOpenPro
       animate={{ opacity: 1 }} 
       exit={{ opacity: 0 }} 
       transition={{ duration: 0.8 }}
-      className="h-screen bg-[#0a0a0d] text-white flex flex-col font-sans overflow-hidden relative selection:bg-[#D4AF37]/30 selection:text-white"
+      className="min-h-screen md:h-screen bg-[#0a0a0d] text-white flex flex-col font-sans overflow-x-hidden md:overflow-hidden relative selection:bg-[#D4AF37]/30 selection:text-white"
     >
       {/* Background Ambience */}
       <div className="absolute top-0 left-1/4 w-[50%] h-[50%] bg-[#D4AF37]/10 rounded-full blur-[150px] mix-blend-screen pointer-events-none opacity-50 z-0"></div>
@@ -151,63 +151,63 @@ export default function OutfitDetail({ movieId, characterType, onBack, onOpenPro
       </nav>
 
       {/* Main Content Split Pane */}
-      <div className="flex-grow grid grid-cols-1 md:grid-cols-[45%_55%] w-full h-full min-h-0 z-10 relative">
+      <div className="flex-grow grid grid-cols-1 md:grid-cols-[45%_55%] w-full h-auto md:h-full md:min-h-0 z-10 relative">
         
         {/* Left Panel: Cinematic Image */}
-        <div className="w-full sticky top-0 h-[100vh] md:h-full overflow-hidden p-4 md:p-6 flex flex-col relative">
+        <div className="w-full md:sticky md:top-0 h-auto md:h-[100vh] md:overflow-hidden p-0 md:p-6 flex flex-col relative z-10">
           <motion.div 
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.8 }}
-            className="w-full h-full relative rounded-3xl overflow-hidden glass-card p-2 shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-[#D4AF37]/20 group"
+            className="w-full h-auto md:h-full relative md:rounded-3xl md:overflow-hidden md:glass-card md:p-2 md:shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-b md:border border-[#D4AF37]/20 group"
           >
-            <div className="w-full h-full rounded-2xl overflow-hidden relative">
+            <div className="w-full h-[50vh] md:h-full md:rounded-2xl overflow-hidden relative">
               {/* Image */}
               <img 
                 src={posterImg} 
                 alt={movieTitle} 
-                className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-[2s] ease-out"
+                className="absolute inset-0 w-full h-full object-cover transform md:group-hover:scale-105 transition-transform duration-[2s] ease-out"
               />
               
               {/* Dark Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0d] via-[#0a0a0d]/40 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0d] via-[#0a0a0d]/40 md:via-transparent to-transparent"></div>
               <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0d]/30 to-transparent"></div>
               
               {/* Top Badge */}
               <div className="absolute top-6 left-6 bg-[#E5B109]/90 text-black px-3 py-1 rounded text-xs font-bold font-sans tracking-widest shadow-lg flex items-center gap-1">
                 <Star className="w-3 h-3 fill-black" /> 8.5
               </div>
+            </div>
               
-              {/* Bottom Content inside Image */}
-              <div className="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6">
-                <h4 className="text-[#D4AF37] text-xs md:text-sm uppercase tracking-[0.3em] font-semibold mb-1 drop-shadow-md">
-                  {movieTitle}
-                </h4>
-                <h1 className="text-3xl md:text-4xl font-cinzel font-bold text-white mb-1 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
-                  {charName}
-                </h1>
-                <p className="text-gray-300 italic font-sans text-xs md:text-sm mb-4 border-l-2 border-[#D4AF37] pl-3 max-w-[80%]">
-                  "The iconic look that defined attitude and power."
-                </p>
-                
-                {/* LOOK DETAILS block */}
-                <div className="glassmorphism rounded-xl p-3 md:p-4 border border-white/10 backdrop-blur-md flex flex-wrap gap-y-2 md:gap-y-3 shadow-2xl">
-                  <div className="w-1/2">
-                    <p className="text-[9px] md:text-[10px] text-gray-400 uppercase tracking-widest mb-0.5">Movie</p>
-                    <p className="text-[#D4AF37] font-semibold text-xs md:text-sm truncate">{movieTitle}</p>
-                  </div>
-                  <div className="w-1/2 pl-3 md:pl-4 border-l border-white/10">
-                    <p className="text-[9px] md:text-[10px] text-gray-400 uppercase tracking-widest mb-0.5">Character</p>
-                    <p className="text-white font-semibold text-xs md:text-sm capitalize">{charName}</p>
-                  </div>
-                  <div className="w-1/2">
-                    <p className="text-[9px] md:text-[10px] text-gray-400 uppercase tracking-widest mb-0.5">Scene</p>
-                    <p className="text-white font-semibold text-xs md:text-sm">Action Sequence</p>
-                  </div>
-                  <div className="w-1/2 pl-3 md:pl-4 border-l border-white/10">
-                    <p className="text-[9px] md:text-[10px] text-gray-400 uppercase tracking-widest mb-0.5">Style</p>
-                    <p className="text-[#D4AF37] font-semibold text-xs md:text-sm">Mass / Rustic</p>
-                  </div>
+            {/* Bottom Content inside Image */}
+            <div className="p-5 md:p-0 relative md:absolute md:bottom-4 md:left-4 md:right-4 lg:bottom-6 lg:left-6 lg:right-6 bg-[#0a0a0d] md:bg-transparent -mt-6 md:mt-0 rounded-t-3xl md:rounded-none z-20">
+              <h4 className="text-[#D4AF37] text-xs md:text-sm uppercase tracking-[0.3em] font-semibold mb-1 drop-shadow-md">
+                {movieTitle}
+              </h4>
+              <h1 className="text-3xl md:text-4xl font-cinzel font-bold text-white mb-1 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+                {charName}
+              </h1>
+              <p className="text-gray-300 italic font-sans text-xs md:text-sm mb-4 border-l-2 border-[#D4AF37] pl-3 max-w-[80%]">
+                "The iconic look that defined attitude and power."
+              </p>
+              
+              {/* LOOK DETAILS block */}
+              <div className="glassmorphism rounded-xl p-3 md:p-4 border border-white/10 backdrop-blur-md flex flex-wrap gap-y-2 md:gap-y-3 shadow-2xl bg-white/5 md:bg-transparent">
+                <div className="w-1/2">
+                  <p className="text-[9px] md:text-[10px] text-gray-400 uppercase tracking-widest mb-0.5">Movie</p>
+                  <p className="text-[#D4AF37] font-semibold text-xs md:text-sm truncate">{movieTitle}</p>
+                </div>
+                <div className="w-1/2 pl-3 md:pl-4 border-l border-white/10">
+                  <p className="text-[9px] md:text-[10px] text-gray-400 uppercase tracking-widest mb-0.5">Character</p>
+                  <p className="text-white font-semibold text-xs md:text-sm capitalize">{charName}</p>
+                </div>
+                <div className="w-1/2">
+                  <p className="text-[9px] md:text-[10px] text-gray-400 uppercase tracking-widest mb-0.5">Scene</p>
+                  <p className="text-white font-semibold text-xs md:text-sm">Action Sequence</p>
+                </div>
+                <div className="w-1/2 pl-3 md:pl-4 border-l border-white/10">
+                  <p className="text-[9px] md:text-[10px] text-gray-400 uppercase tracking-widest mb-0.5">Style</p>
+                  <p className="text-[#D4AF37] font-semibold text-xs md:text-sm">Mass / Rustic</p>
                 </div>
               </div>
             </div>
@@ -215,7 +215,7 @@ export default function OutfitDetail({ movieId, characterType, onBack, onOpenPro
         </div>
 
         {/* Right Panel: Products & Details */}
-        <div className="w-full h-[100vh] md:h-full overflow-y-auto hide-scrollbar bg-[#121217]/50 backdrop-blur-2xl border-l border-white/5 relative">
+        <div className="w-full h-auto md:h-[100vh] lg:h-full md:overflow-y-auto hide-scrollbar bg-[#121217]/50 backdrop-blur-2xl border-t md:border-t-0 md:border-l border-white/5 relative">
           <div className="p-4 md:p-6 max-w-4xl mx-auto flex flex-col gap-4">
             
             {/* Header */}
@@ -230,17 +230,17 @@ export default function OutfitDetail({ movieId, characterType, onBack, onOpenPro
             </motion.div>
 
             {/* Products Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
+            <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 md:gap-5">
               {DUMMY_PRODUCTS.map((product, idx) => (
                 <motion.div
                   key={product.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 + (idx * 0.1), duration: 0.6 }}
-                  className="bg-[#0a0a0d]/60 rounded-2xl border border-white/5 hover:border-[#D4AF37]/50 transition-all duration-500 overflow-hidden group hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] flex flex-col"
+                  className="bg-[#0a0a0d]/60 rounded-xl md:rounded-2xl border border-white/5 hover:border-[#D4AF37]/50 transition-all duration-500 overflow-hidden group hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] flex flex-col"
                 >
-                  <div className="w-full h-36 md:h-40 relative overflow-hidden bg-[#121217] p-3">
-                    <div className="w-full h-full rounded-xl overflow-hidden relative">
+                  <div className="w-full h-28 md:h-40 relative overflow-hidden bg-[#121217] p-2 md:p-3">
+                    <div className="w-full h-full rounded-lg md:rounded-xl overflow-hidden relative">
                       <img 
                         src={product.image} 
                         alt={product.name}
@@ -250,26 +250,26 @@ export default function OutfitDetail({ movieId, characterType, onBack, onOpenPro
                     {/* Heart Icon Top Right */}
                     <button 
                       onClick={() => toggleLike(product)}
-                      className="absolute top-4 right-4 p-2 rounded-full bg-black/40 backdrop-blur-md border border-white/10 hover:bg-black/60 transition-colors z-10"
+                      className="absolute top-3 right-3 md:top-4 md:right-4 p-1.5 md:p-2 rounded-full bg-black/40 backdrop-blur-md border border-white/10 hover:bg-black/60 transition-colors z-10"
                     >
-                      <Heart className={`w-4 h-4 ${isLiked(product.id) ? "fill-[#D4AF37] text-[#D4AF37]" : "text-white"}`} />
+                      <Heart className={`w-3 h-3 md:w-4 md:h-4 ${isLiked(product.id) ? "fill-[#D4AF37] text-[#D4AF37]" : "text-white"}`} />
                     </button>
                   </div>
                   
-                  <div className="p-4 md:p-5 flex flex-col flex-grow">
+                  <div className="p-3 md:p-5 flex flex-col flex-grow">
                     <div className="mb-2 md:mb-3 flex-grow">
-                      <h3 className="text-base md:text-lg font-outfit font-bold text-white group-hover:text-[#D4AF37] transition-colors leading-tight">{product.name}</h3>
-                      <p className="text-[11px] md:text-xs text-gray-500 font-sans mt-1">{product.subtitle}</p>
+                      <h3 className="text-xs md:text-lg font-outfit font-bold text-white group-hover:text-[#D4AF37] transition-colors leading-tight truncate">{product.name}</h3>
+                      <p className="text-[9px] md:text-xs text-gray-500 font-sans mt-0.5 md:mt-1 truncate">{product.subtitle}</p>
                     </div>
                     
                     <div className="flex items-center justify-between mt-auto">
-                      <span className="text-lg md:text-xl font-light text-gray-200">
-                        {product.available ? `₹${product.price.toLocaleString()}` : <span className="text-xs text-red-400">Unavailable</span>}
+                      <span className="text-xs md:text-xl font-light text-gray-200">
+                        {product.available ? `₹${product.price.toLocaleString()}` : <span className="text-[9px] md:text-xs text-red-400">Unavailable</span>}
                       </span>
                       {product.available && (
                         <button 
                           onClick={() => toggleCart(product)}
-                          className={`text-[10px] md:text-xs font-bold uppercase tracking-wider px-3 py-1.5 md:py-2 rounded-lg transition-all border ${
+                          className={`text-[8px] md:text-xs font-bold uppercase tracking-wider px-2 py-1 md:px-3 md:py-2 rounded-md md:rounded-lg transition-all border ${
                             isInCart(product.id) 
                               ? 'bg-[#D4AF37]/20 border-[#D4AF37]/50 text-[#D4AF37]' 
                               : 'bg-black border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black hover:shadow-[0_0_15px_rgba(212,175,55,0.5)]'
