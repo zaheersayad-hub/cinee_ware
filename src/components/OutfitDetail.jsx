@@ -212,6 +212,61 @@ export default function OutfitDetail({ movieId, characterType, onBack, onOpenPro
                   <p className="text-[#D4AF37] font-semibold text-xs md:text-sm">Mass / Rustic</p>
                 </div>
               </div>
+
+              {/* Desktop Only: Extended Cinematic Info */}
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="hidden md:flex flex-col mt-6 pt-6 border-t border-white/10"
+              >
+                {/* Meta Header */}
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[#D4AF37] font-semibold text-[10px] tracking-widest uppercase">Director</span>
+                    <span className="text-gray-300 text-xs">Sandeep Vanga</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[#D4AF37] font-semibold text-[10px] tracking-widest uppercase">Year</span>
+                    <span className="text-gray-300 text-xs">2023</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 bg-[#121217] px-2 py-1 rounded border border-white/5 shadow-inner">
+                    <Star className="w-3 h-3 fill-[#E5B109] text-[#E5B109]" />
+                    <span className="text-white font-bold text-xs">8.5</span>
+                    <span className="text-gray-500 text-[9px] uppercase tracking-wider ml-1">IMDb</span>
+                  </div>
+                </div>
+
+                {/* Synopsis */}
+                <div className="mb-5">
+                  <p className="text-gray-400 font-sans text-xs leading-relaxed">
+                    A son's obsessive love for his father leads him down a dark, violent path. The character exudes unhinged aggression, combining tailored elegance with raw, blood-stained brutality that redefined the modern anti-hero archetype.
+                  </p>
+                </div>
+
+                {/* Character Energy / Mood Tags */}
+                <div className="mb-5">
+                  <p className="text-[9px] text-gray-500 uppercase tracking-widest mb-2">Character Energy</p>
+                  <div className="flex flex-wrap gap-2">
+                    {["Alpha", "Aggressive", "Obsessive", "Unpredictable", "Mass"].map((tag, i) => (
+                      <span key={i} className="px-3 py-1.5 text-[9px] font-bold tracking-widest uppercase text-gray-300 bg-[#121217] border border-white/5 rounded hover:border-[#D4AF37]/50 transition-colors cursor-default shadow-sm">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Signature Dialogue */}
+                <div className="bg-gradient-to-r from-[#121217] to-[#0a0a0d] rounded-xl p-4 border-l-2 border-[#D4AF37] relative overflow-hidden shadow-lg">
+                  <div className="absolute -right-4 -bottom-4 opacity-[0.02]">
+                    <User className="w-32 h-32" />
+                  </div>
+                  <p className="text-[9px] text-[#D4AF37]/70 uppercase tracking-widest mb-1.5 relative z-10">Signature Dialogue</p>
+                  <p className="text-gray-200 font-cinzel text-sm italic relative z-10 leading-snug drop-shadow-md">
+                    "You have no idea what I can do for you... and what I can do to them."
+                  </p>
+                </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>
